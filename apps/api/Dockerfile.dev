@@ -1,0 +1,18 @@
+FROM node:20.15-alpine3.19 AS base
+
+# Set Permissions
+FROM base AS setter-permissions
+RUN addgroup --system --gid 1001 clarke
+RUN adduser --system --uid 1001 clarke-api
+USER clarke-api
+
+# Install Dependencies and run the app
+FROM base AS runner
+WORKDIR /app
+COPY .gitignore .gitignore
+RUN yarn install --frozen-lockfile
+
+# Start the app in development mode
+EXPOSE 3333
+CMD ["yarn", "dev"]
+

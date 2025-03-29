@@ -1,0 +1,35 @@
+services:
+  clarke-mysql:
+    container_name: clarke-mysql
+    image: mysql:8.0.38
+    restart: always
+    ports:
+      - ${CLARKE_MYSQL_EXPOSED_PORT-3306}:3306
+    environment:
+      MYSQL_ROOT_PASSWORD: ${CLARKE_MYSQL_ROOT_PASSWORD:-root}
+      MYSQL_DATABASE: ${CLARKE_MYSQL_DATABASE:-db_clarke}
+    volumes:
+      - clarke-data:/var/lib/mysql
+    networks:
+      - clarke-network
+
+  clarke-api:
+    container_name: clarke-api
+    build:
+      context: .
+      dockerfile: ./apps/api/Dockerfile.dev
+    restart: always
+    volumes:
+      - ./apps/api:/app
+    ports:
+      - 3333:3333
+    depends_on:
+      - clarke-mysql
+    networks:
+      - clarke-network
+
+volumes:
+  clarke-data:
+
+networks:
+  clarke-network:

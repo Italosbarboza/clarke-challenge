@@ -1,0 +1,42 @@
+services:
+  clarke-api-migration-up:
+    build:
+      context: .
+      dockerfile: ./apps/api/Dockerfile.dev
+    command:
+      - yarn
+      - run
+      - migration:up
+    volumes:
+      - ./apps/api:/app
+    networks:
+      - clarke-network
+
+  clarke-api-migration-down:
+    build:
+      context: .
+      dockerfile: ./apps/api/Dockerfile.dev
+    command:
+      - yarn
+      - run
+      - migration:down
+    volumes:
+      - ./apps/api:/app
+    networks:
+      - clarke-network
+
+  clarke-api-seeds:
+    build:
+      context: .
+      dockerfile: ./apps/api/Dockerfile.dev
+    command:
+      - yarn
+      - run
+      - seed:run
+    volumes:
+      - ./apps/api:/app
+    networks:
+      - clarke-network
+
+networks:
+  clarke-network:

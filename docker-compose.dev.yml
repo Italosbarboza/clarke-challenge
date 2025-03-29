@@ -28,6 +28,25 @@ services:
     networks:
       - clarke-network
 
+  clarke-web:
+    container_name: clarke-web
+    build:
+      context: .
+      dockerfile: ./apps/web/Dockerfile.dev
+    command:
+      - yarn
+      - run
+      - dev
+    expose:
+      - 3000
+    ports:
+      - 3000:3000
+    volumes:
+      - ./apps/web:/app
+    restart: always
+    networks:
+      - clarke-network
+
 volumes:
   clarke-data:
 

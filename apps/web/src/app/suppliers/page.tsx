@@ -1,26 +1,12 @@
 'use client';
 
-import { gql, useLazyQuery } from '@apollo/client';
+import { useLazyQuery } from '@apollo/client';
 
 import { Supplier } from './types';
 import { SearchForm } from './molecules/SearchForm';
 import { SupplierList } from './organisms/SupplierList';
+import { GET_SUPPLIERS } from './graphql/queries';
 
-const GET_SUPPLIERS = gql`
-  query GetSuppliers($input: GetSuppliersInput!) {
-    suppliers(input: $input) {
-      id
-      name
-      logo
-      state
-      source
-      pricePerKwh
-      minKwh
-      totalClients
-      averageRating
-    }
-  }
-`;
 
 export default function SuppliersPage() {
   const [loadSuppliers, { data, loading, error }] = useLazyQuery(GET_SUPPLIERS);

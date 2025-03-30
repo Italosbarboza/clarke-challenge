@@ -6,7 +6,11 @@
     "docker:dev:down": "docker compose -f docker-compose.dev.yml down",
     "docker:dev:build": "docker compose -f docker-compose.dev.yml build",
     "docker:migration:up": "docker compose -f docker-compose.db.yml up clarke-api-migration-up",
-    "docker:seed:run": "docker compose -f docker-compose.db.yml up clarke-api-seeds"
-
+    "docker:seed:run": "docker compose -f docker-compose.db.yml up clarke-api-seeds",
+    "test": "yarn --cwd apps/web test && yarn --cwd apps/api test",
+    "prepare": "husky"
+  },
+  "devDependencies": {
+    "husky": "^9.1.7"
   }
 }

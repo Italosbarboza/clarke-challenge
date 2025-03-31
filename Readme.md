@@ -13,11 +13,11 @@ Before running the project, make sure you have the following tools installed:
 - [Docker](https://www.docker.com/)
 
 ---
-## Informations Cloud
+## Informations
 
 ### Application on EC2
 
-You can access the application through the following URL, hosted on your EC2 instance:
+You can access the application through the following URL, hosted on EC2 instance:
 ```bash
 http://clarke.fornecedores.listaperfeita.com/suppliers
 ```
@@ -31,6 +31,10 @@ The project is configured with CI/CD using GitHub Actions workflows. The CI pipe
 4. Start the services in Docker containers on the EC2 instance.
 
 The GitHub Actions workflow configuration ensures that the deployment is automatic and happens seamlessly whenever there are changes pushed to the main branch.
+
+### HUSKY
+
+There is a pre commit for each commit, where the unit tests will run.
 
 ## ⚙️ Environment Setup
 
@@ -119,7 +123,19 @@ If you haven't run the migrations yet, follow these steps:
 yarn docker:migration:up
 ```
 
-### Step 4 – Run the application on localhost
+### Step 4 – Run seeders
+
+If you haven't run the seeders yet, follow these steps:
+
+1. **Open a new terminal window** – Make sure your Docker containers are still running.
+2. **Navigate to the project root** – Make sure you are in the root directory of the project where the `docker-compose.yml` file is located.
+3. **Run the seeders** – Execute the following command to apply the seeders to insert datas in MySQL database Docker container:
+
+```bash
+yarn docker:seed:run
+```
+
+### Step 5 – Run the application on localhost
 
 After running the services and migrations, you can access the application locally.
 

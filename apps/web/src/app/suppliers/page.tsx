@@ -15,11 +15,15 @@ export default function SuppliersPage() {
     loadSuppliers({ variables: { input: { consumption } } });
   };
 
+  const handleClear = () => {
+    loadSuppliers({ variables: { input: { consumption: 0 } } });
+  };
+
   return (
     <main className="max-w-2xl mx-auto p-4">
       <h1 className="text-2xl font-bold mb-4">Search Energy Suppliers</h1>
 
-      <SearchForm onSubmit={handleSearch} />
+      <SearchForm onSubmit={handleSearch} onClear={handleClear} />
 
       {loading && <p>Loading suppliers...</p>}
       {error && <p className="text-red-500">Error: {error.message}</p>}

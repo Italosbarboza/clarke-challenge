@@ -7,6 +7,14 @@ type Props = {
 };
 
 export function SupplierList({ suppliers }: Props) {
+  if (suppliers.length === 0) {
+    return (
+      <p className="mt-6 text-center text-gray-500">
+        No suppliers found.
+      </p>
+    );
+  }
+
   return (
     <ul className="grid gap-4 mt-6">
       {suppliers.map((s) => (

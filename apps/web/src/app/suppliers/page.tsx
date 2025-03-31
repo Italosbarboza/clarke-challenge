@@ -1,21 +1,24 @@
 'use client';
 
 import { useLazyQuery } from '@apollo/client';
+import { useState } from 'react';
 
-import { Supplier } from './types';
 import { SearchForm } from './molecules/SearchForm';
 import { SupplierList } from './organisms/SupplierList';
 import { GET_SUPPLIERS } from './graphql/queries';
 
-
 export default function SuppliersPage() {
+  const [hasSearched, setHasSearched] = useState(false);
+
   const [loadSuppliers, { data, loading, error }] = useLazyQuery(GET_SUPPLIERS);
 
   const handleSearch = (consumption: number) => {
+    setHasSearched(true);
     loadSuppliers({ variables: { input: { consumption } } });
   };
 
   const handleClear = () => {
+    setHasSearched(false);
     loadSuppliers({ variables: { input: { consumption: 0 } } });
   };
 
@@ -28,7 +31,10 @@ export default function SuppliersPage() {
       {loading && <p>Loading suppliers...</p>}
       {error && <p className="text-red-500">Error: {error.message}</p>}
 
-      {data?.suppliers && <SupplierList suppliers={data.suppliers as Supplier[]} />}
+      <SupplierList
+        suppliers={data?.suppliers ?? []}
+        hasSearched={hasSearched}
+      />
     </main>
   );
 }

@@ -19,7 +19,7 @@ Before running the project, make sure you have the following tools installed:
 
 You can access the application through the following URL, hosted on EC2 instance:
 ```bash
-http://clarke.fornecedores.listaperfeita.com/suppliers
+https://clarkefornecedores.listaperfeita.com/suppliers
 ```
 
 ### CI/CD Pipeline

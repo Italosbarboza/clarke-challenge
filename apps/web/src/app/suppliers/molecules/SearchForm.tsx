@@ -40,7 +40,7 @@ export function SearchForm({ onSubmit, onClear }: Props) {
       />
       <Button type="submit">Search</Button>
       <Button type="button" onClick={handleClear}>
-        Clean
+        Clear
       </Button>
     </form>
   );

@@ -4,9 +4,18 @@ import { Supplier } from "../types";
 
 type Props = {
   suppliers: Supplier[];
+  hasSearched: boolean;
 };
 
-export function SupplierList({ suppliers }: Props) {
+export function SupplierList({ suppliers, hasSearched }: Props) {
+  if (!hasSearched) {
+    return (
+      <div className="flex flex-col items-center justify-center h-64 text-center text-gray-500">
+        <p>Please enter your consumption to search for suppliers.</p>
+      </div>
+    );
+  }
+
   if (suppliers.length === 0) {
     return (
       <p className="mt-6 text-center text-gray-500">

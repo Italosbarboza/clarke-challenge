@@ -13,6 +13,24 @@ Before running the project, make sure you have the following tools installed:
 - [Docker](https://www.docker.com/)
 
 ---
+## Informations Cloud
+
+### Application on EC2
+
+You can access the application through the following URL, hosted on your EC2 instance:
+```bash
+http://clarke.fornecedores.listaperfeita.com/suppliers
+```
+
+### CI/CD Pipeline
+The project is configured with CI/CD using GitHub Actions workflows. The CI pipeline automatically builds and deploys the project to an EC2 instance whenever there is a push to the main branch. This includes the following steps:
+
+1. Pull the latest changes from the main branch.
+2. Install backend and frontend dependencies.
+3. Build Docker images for the backend, frontend, and database.
+4. Start the services in Docker containers on the EC2 instance.
+
+The GitHub Actions workflow configuration ensures that the deployment is automatic and happens seamlessly whenever there are changes pushed to the main branch.
 
 ## ⚙️ Environment Setup
 

@@ -1,0 +1,55 @@
+name: CI/CD Pipeline for EC2
+
+on:
+  push:
+    branches:
+      - main  
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v2
+
+    - name: Set up SSH for EC2 deployment
+      uses: webfactory/ssh-agent@v0.5.3
+      with:
+        ssh-private-key: ${{ secrets.EC2_SSH_PRIVATE_KEY }}  
+
+    - name: Connect to EC2 and execute commands
+      run: |
+        ssh -o StrictHostKeyChecking=no ubuntu@${{ secrets.EC2_PUBLIC_IP }} << 'EOF'
+          # Load NVM (Node Version Manager)
+          source ~/.nvm/nvm.sh
+
+          # Use the correct Node.js version for the project
+          nvm use
+
+          # Install Yarn
+          npm install -g yarn
+
+          # Navigate to the project directory
+          cd ~/clarke-challenge
+
+          # Perform git pull to get the latest changes
+          git pull origin main
+
+          # Install API dependencies
+          cd apps/api
+          yarn install
+
+          # Install frontend dependencies
+          cd ../web
+          yarn install
+
+          # Return to the project root
+          cd ..
+
+          # Build Docker images
+          yarn docker:dev:build
+
+          # Start the containers
+          yarn docker:dev -d
+        EOF

@@ -1,4 +1,5 @@
 import { config as dotenvConfig } from 'dotenv';
+import { Supplier } from '../modules/suppliers/entities/supplier.entity';
 import { DataSource, DataSourceOptions } from 'typeorm';
 import { SeederOptions } from 'typeorm-extension';
 
@@ -13,7 +14,7 @@ const dataSource = new DataSource({
   username: process.env.DATABASE_USER,
   password: process.env.DATABASE_PASSWORD,
   database: process.env.DATABASE_NAME,
-  entities: [`${__dirname}/../src/**/entity/*.ts`],
+  entities: [Supplier],
   migrations: [`${__dirname}/migrations/**/*.ts`],
   seeds: [`${__dirname}/seeds/**/*.ts`],
   factories: [`${__dirname}/factories/**/*.ts`],

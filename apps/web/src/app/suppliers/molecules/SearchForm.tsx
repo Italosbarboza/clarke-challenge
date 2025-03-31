@@ -9,7 +9,7 @@ type Props = {
 };
 
 export function SearchForm({ onSubmit }: Props) {
-  const [value, setValue] = useState(3000);
+  const [value, setValue] = useState(0);
 
   return (
     <form

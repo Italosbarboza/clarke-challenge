@@ -1,5 +1,7 @@
 'use client';
 
+import { Plug } from "lucide-react";
+import { useState } from "react";
 import { Supplier } from "../types";
 
 type Props = {
@@ -27,28 +29,44 @@ export function SupplierList({ suppliers, hasSearched }: Props) {
   return (
     <ul className="grid gap-4 mt-6">
       {suppliers.map((s) => (
-        <li key={s.id} className="p-4 border rounded shadow-sm">
-          <div className="flex items-center gap-4">
-            {s.logo && (
-              <img
-                src={s.logo}
-                alt={s.name}
-                className="w-16 h-16 object-contain"
-                onError={(e) => (e.currentTarget.style.display = 'none')}
-              />
-            )}
-            <div>
-              <h2 className="text-lg font-semibold">{s.name}</h2>
-              <p>
-                <strong>R${s.pricePerKwh}</strong>/kWh – {s.source} – {s.state}
-              </p>
-              <p className="text-sm text-gray-600">
-                Clients: {s.totalClients} – Rating: {s.averageRating}
-              </p>
-            </div>
-          </div>
-        </li>
+        <SupplierItem key={s.id} supplier={s} />
       ))}
     </ul>
+  );
+}
+
+type SupplierItemProps = {
+  supplier: Supplier;
+};
+
+function SupplierItem({ supplier }: SupplierItemProps) {
+  const [imageError, setImageError] = useState(false);
+
+  return (
+    <li className="p-4 border rounded shadow-sm">
+      <div className="flex items-center gap-4">
+        {!imageError && supplier.logo ? (
+          <img
+            src={supplier.logo}
+            alt={supplier.name}
+            className="w-16 h-16 object-contain"
+            onError={() => setImageError(true)}
+          />
+        ) : (
+          <div className="w-16 h-16 flex items-center justify-center bg-gray-100 rounded">
+            <Plug className="w-8 h-8 text-gray-400" />
+          </div>
+        )}
+        <div>
+          <h2 className="text-lg font-semibold">{supplier.name}</h2>
+          <p>
+            <strong>R${supplier.pricePerKwh}</strong>/kWh – {supplier.source} – {supplier.state}
+          </p>
+          <p className="text-sm text-gray-600">
+            Clients: {supplier.totalClients} – Rating: {supplier.averageRating}
+          </p>
+        </div>
+      </div>
+    </li>
   );
 }

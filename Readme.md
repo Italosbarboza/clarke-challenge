@@ -64,16 +64,14 @@ Navigate to the project root and then to the `apps/web` directory and install de
 
 ### Step 3 – Set up the environment variables
 
-There are **two `.env` files** used in this project:
+There are **three `.env` files** used in this project:
 
 1. `.env` in the **project root** – Used by Docker (`docker-compose.yml`) to configure services like MySQL.  
 2. `.env` inside `apps/api` – Used by the **NestJS backend** to connect to the database.
-
+3. `.env.local` inside `apps/web` – Used by the **React web** to connect to the API.
 ---
 
-#### Root and API `.env` – used by Docker Compose and NestJS
-
-There are **two `.env` files** to configure for the project. Follow these steps:
+#### Root, API and Web `.env` – used by Docker Compose, NestJS and React
 
 1. **For the root `.env` file** (used by Docker Compose):
 
@@ -89,6 +87,15 @@ There are **two `.env` files** to configure for the project. Follow these steps:
   ```bash
   cd apps/api
   cp .env.example .env
+  ```
+
+3. **For the `.env.local` file** inside apps/web (used by the React frontend):
+
+  Navigate to the apps/web directory and create the file there:
+
+  ```bash
+  cd apps/web
+  cp .env.example .env.local
   ```
 
 ## 🐳 Running the Project with Docker

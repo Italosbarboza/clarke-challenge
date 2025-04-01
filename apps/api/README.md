@@ -43,7 +43,7 @@ nvm use
 
 There is `.env` file** used in this project:
 
-   Create the file in the root directory of the project:
+  Create the file in the root directory of the project:
 
 ```bash
   cp .env.example .env

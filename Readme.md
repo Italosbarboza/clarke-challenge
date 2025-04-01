@@ -43,7 +43,7 @@ yarn test
 ```
 
 Should show this test coverage
-![alt text](image.png)
+![alt text](/public/test-coverage.png)
 
 ## ⚙️ Environment Setup
 

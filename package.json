@@ -8,9 +8,11 @@
     "docker:migration:up": "docker compose -f docker-compose.db.yml up clarke-api-migration-up",
     "docker:seed:run": "docker compose -f docker-compose.db.yml up clarke-api-seeds",
     "test": "yarn --cwd apps/web test && yarn --cwd apps/api test",
+    "lint": "yarn --cwd apps/web lint && yarn --cwd apps/api lint",
+    "lint:fix": "yarn --cwd apps/web lint:fix && yarn --cwd apps/api lint:fix",
     "prepare": "husky"
   },
   "devDependencies": {
-    "husky": "^9.1.7"
+    "husky": "9.1.7"
   }
 }

@@ -36,6 +36,15 @@ The GitHub Actions workflow configuration ensures that the deployment is automat
 
 There is a pre commit for each commit, where the unit tests will run.
 
+### TESTS
+For run tests, should run this command in terminal: 
+```bash
+yarn test
+```
+
+Should show this test coverage
+![alt text](image.png)
+
 ## ⚙️ Environment Setup
 
 ### Step 1 – Use the correct Node version

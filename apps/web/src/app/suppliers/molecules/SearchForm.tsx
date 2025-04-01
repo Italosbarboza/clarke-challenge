@@ -1,8 +1,8 @@
 'use client';
 
 import { useState } from 'react';
-import { Input } from '../atoms/Input';
-import { Button } from '../atoms/Button';
+import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
 
 type Props = {
   onSubmit: (consumption: number) => void;
